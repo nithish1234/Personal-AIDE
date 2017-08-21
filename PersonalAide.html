@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+  <title>Personal AIDE</title>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <style>
+  body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+  </style>
+  <body class="w3-light-grey">
+    <!-- w3-content defines a container for fixed size centered content,
+    and is wrapped around the whole page content, except for the footer in this example -->
+    <div ng-app="myApp" ng-controller="myCtrl">
+      <div class="w3-content" style="max-width:1400px">
+        <!-- Header -->
+        <header class="w3-container w3-center w3-padding-32">
+          <h1><b>Personal AIDE</b></h1>
+          <p>Never miss your  <span class="w3-tag">TIME......</span></p>
+        </header>
+        <!-- Grid -->
+        <div class="w3-row">
+          <!-- Blog entries -->
+          <div class="w3-col l8 s12">
+            <!-- Blog entry -->
+            <div class="w3-card-4 w3-margin w3-white">
+              
+              <div class="w3-container">
+                <h3><b>Add Reminder</b></h3>
+                <h5>Title description, <span class="w3-opacity">April 7, 2014</span></h5>
+              </div>
+              <div class="w3-container">
+                <p>Barton did feebly change man she afford square add. Want eyes by neat so just must. Past draw tall up face show rent oh mr. Required is debating extended wondered as do. New get described applauded incommode shameless out extremity but. Resembled at perpetual no believing is otherwise sportsman. Is do he dispatched cultivated travelling astonished. Melancholy am considered possession on collecting everything. </p>
+                <div class="w3-row">
+                  <div class="w3-col m8 s12">
+                    <p><button class="w3-button w3-padding-large w3-white w3-border"  ng-click="ClickToPreviewForm()"><b>Add Reminder</b></button></p>
+                    <div ng-show="showMe">
+                      <form  name="myForm">
+                        <div class="form-group">
+                          <label for="email">Name Of the Event</label>
+                          <input type="text" class="form-control" id="email" placeholder="Enter Name of the Event" name="Event" required="true" ng-minlength=20>
+                          <span ng-show=" myForm.Event.$error.required && myForm.Event.$dirty "> please enter First Name</span>
+                            <span ng-show=" myForm.Event.$error.minlength">Name must be greater than 3char</span>
+                            
+                        </div>
+                        <div class="form-group">
+                          <label for="email">Subject</label>
+                          <input type="text" class="form-control" id="Address" placeholder="Enter Subject" name="Subject">
+                             <span ng-show=" myForm.Subject.$error.required && myForm.Subject.$dirty "> please enter Subject</span>
+                        </div>
+                        <div class="form-group">
+                          <label for="comment">Address:</label>
+                          <textarea class="form-control" rows="3" id="comment"></textarea>
+                        </div>
+                      
+    <div class='col-md-6'>
+  <label for="email">Date</label>
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker6'>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class='col-md-6'>
+    <label for="email">Time</label>
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker7'>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+                        <div class="checkbox">
+                          <label for="pwd">Priority:</label><br><br>
+                          <label class="radio-inline"><input type="radio" name="optradio">High</label>
+                          <label class="radio-inline"><input type="radio" name="optradio">Low</label>
+                          <label class="radio-inline"><input type="radio" name="optradio">Tentative</label>
+                        </div><br><br>
+                        <button type="button" class="btn btn-default" ng-disabled=myForm.$invalid>Add Reminder</button>
+                        {{myForm|json}}
+                      </form>
+                      <br><br><br>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
+            <!--   <div class="w3-card-4 w3-margin w3-white">
+              <img src="/w3images/bridge.jpg" alt="Norway" style="width:100%">
+              <div class="w3-container">
+                <h3><b>BLOG ENTRY</b></h3>
+                <h5>Title description, <span class="w3-opacity">April 2, 2014</span></h5>
+              </div>
+              <div class="w3-container">
+                <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed
+                tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+                <div class="w3-row">
+                  <div class="w3-col m8 s12">
+                    <p><button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE »</b></button></p>
+                  </div>
+                  <div class="w3-col m4 w3-hide-small">
+                    <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-badge">2</span></span></p>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <!-- END BLOG ENTRIES -->
+          </div>
+          <!-- Introduction menu -->
+          <div class="w3-col l4">
+            <!-- About Card -->
+            <div class="w3-card-2 w3-margin  w3-margin-top">
+              
+              <div class="w3-container w3-white">
+                <h4><b>Comming Reminder</b></h4>
+                <p>Confrence  @ "Revature" On Microservices</p><br>
+                <p>Priority:High</p>
+              </div>
+            </div>
+            <hr>
+            
+            <!-- Posts -->
+            <div class="w3-card-2 w3-margin">
+              <div class="w3-container w3-padding">
+                <h4>Reminder</h4>
+              </div>
+              <ul class="w3-ul w3-hoverable w3-white">
+                <li class="w3-padding-16">
+                  <span class="w3-large">Lunch@veston</span><br>
+                  <span>Monday  27.09/2017</span>
+                  <span>Priority:High</span><br><br>
+                  <button class="w3-button w3-white w3-border w3-round-large">Delete</button>
+                </li>
+                <li class="w3-padding-16">
+                  <span class="w3-large">Meeteing @ Revature</span><br>
+                  <span>wednesday  27.11/2017</span>
+                  <span>Priority:High</span><br><br>
+                  <button class="w3-button w3-white w3-border w3-round-large">Delete</button>
+                </li>
+                <li class="w3-padding-16">
+                  <span class="w3-large">Confrence with Mr.Drake</span><br>
+                  <span>Monday 09/9/12</span>
+                  <span>Priority:High</span><br><br>
+                  <button class="w3-button w3-white w3-border w3-round-large">Delete</button>
+                </li>
+                <li class="w3-padding-16 w3-hide-medium w3-hide-small">
+                  <span class="w3-large">Annual Meet </span><br>
+                  <span>Saturday 7/07/2016</span>
+                  <span>Priority:Tentative</span><br><br>
+                  <button class="w3-button w3-white w3-border w3-round-large">Delete</button>
+                </li>
+              </ul>
+            </div>
+            <hr>
+            
+            <!-- Labels / tags -->
+            <div class="w3-card-2 w3-margin">
+              <div class="w3-container w3-padding">
+                <h4>Old Reminders</h4>
+              </div>
+              <div class="w3-container w3-white">
+                <p><span class="w3-tag w3-black w3-margin-bottom">january</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">feb</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">november</span>
+                <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">july</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">march</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">december</span>
+                <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">august</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">aprial</span>
+                <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">september</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">may</span>
+                <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">october</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">june</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END Introduction Menu -->
+    </div>
+    <!-- END GRID -->
+  </div><br>
+  <!-- END w3-content -->
+</div>
+<!-- Footer -->
+<!-- footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+</footer> -->
+<script >
+ $(function () {
+        $('#datetimepicker6').datetimepicker();
+        $('#datetimepicker7').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+$scope.showMe = false;
+$scope.ClickToPreviewForm = function() {
+$scope.showMe = !$scope.showMe;
+}
+});
+</script>
+</body>
+</html>
