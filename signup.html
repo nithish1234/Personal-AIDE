@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <title>Personal AIDE</title>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <div class="w3-content" style="max-width:1400px">
+            <!-- Header -->
+            <header class="w3-container w3-center w3-padding-32">
+                <h1><b>Personal AIDE</b></h1>
+                <p>Never miss your  <span class="w3-tag">CONTACT......</span></p>
+            </header>
+            
+            <!-- Grid -->
+            <div class="w3-row" >
+                <!-- Blog entries -->
+                <div class="w3-col 10 m6">
+                    <!-- Blog entry -->
+                    <div class="w3-card-4 w3-margin w3-white">
+                        
+                        
+                        <div class="w3-container">
+                            <center><h3><b>Register Form</b></h3>
+                            
+                        </div>
+                        
+                        <div class="w3-container">
+                            
+                            <div class="w3-row">
+                                <div class="w3-col m8 s12">
+                                    <form  name="RegisterForm">
+                                        <div  class="form-group" >
+                                            <label >User Name</label>
+                                            <input type="text" class="form-control" id="userName" placeholder="Enter Name of the Contact" name="User Name" required="true" ng-minlength=3 ng-model="register.userName">
+                                            
+                                            
+                                        </div>
+                                        <div  class="form-group">
+                                            <label >Password</label>
+                                            <input type="text" class="form-control" id="password" placeholder="Enter Number" name="Password" required="true" ng-model="register.Password"
+                                            ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/">
+                                        </div>
+                                        <div class="form-group" >
+                                            <label > Confirm Password</label>
+                                            <input type="text" class="form-control" id="cPassword" placeholder="Enter Number" name="Confirm Password" required="true" ng-model="register.cPassword"
+                                            ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/">
+                                        </div><br><br>
+                                        <center><p><button style="margin-left: 70px;"   class="w3-button w3-padding-large w3-white w3-border"  ng-click="UserSignUp()"><b>Sign UP</b></button></p></center>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <script>
+                    var app = angular.module('myApp', []);
+                    app.controller('myCtrl', function($scope,$http){
+                    
+                    
+                    $scope.UserSignUp = function() {
+                    
+                    var url = "http://localhost:8080";
+                    $http.post(url + '/register', {
+                    
+                    "userName":$scope.register.userName,
+                    "password":$scope.register.password,
+                    "confirmPassword":$scope.register.cPassword
+                    })  .then(function(response) {
+                    alert("success");},function(response){
+                    alert("failure");
+                    });
+                    
+                    }    });
+                    
+                    </script>
+                    
+                </html>

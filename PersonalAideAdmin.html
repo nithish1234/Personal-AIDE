@@ -45,15 +45,15 @@
                       
                       
                       <form name="searchForm">
-                      <div class="form-group">
-                        <label for="email">Name Of the contact</label>
-                        
-                        <input type="Search" class="form-control" id="email" placeholder="Enter Contact Name to be Searched" name="Event" required="true"  ng-model="user.SearchUser">
-                        <span style="color: red" ng-show="searchForm.Event.$error.required &&  myForm.number.$dirty">Name is Requried</span>
-                        
-                        
-                      </div>
-                      <button type="button" class="btn btn-default" ng-disabled=searchForm.$invalid ng-click="SearchContacts(user)">Search Contact</button>
+                        <div class="form-group">
+                          <label for="email">Name Of the contact</label>
+                          
+                          <input type="Search" class="form-control" id="email" placeholder="Enter Contact Name to be Searched" name="Event" required="true"  ng-model="user.SearchUser">
+                          <span style="color: red" ng-show="searchForm.Event.$error.required &&  myForm.number.$dirty">Name is Requried</span>
+                          
+                          
+                        </div>
+                        <button type="button" class="btn btn-default" ng-disabled=searchForm.$invalid ng-click="SearchContacts(user)">Search Contact</button>
                       </form>
                       <br><br><br>
                     </div>
@@ -78,12 +78,11 @@
             <div class="w3-card-2 w3-margin">
               <div class="w3-container w3-padding">
                 <ul class="w3-ul w3-hoverable ">
-                  <li class="w3-padding-16"  ng-repeat="user in emptyArray">
+                  <li class="w3-padding-16"  ng-repeat="u in emptyArray">
                     
-                    <h4>Name:{{user.SearchUser}}</h4><br><br>
+                    <h4>Name:{{u.SearchUser}}</h4><br><br>
                   <sapn>Total Contacts::{{emptyArray.length}}</span><br>
-<br>
-
+                  <br>
                   
                   <button class="w3-button w3-white w3-border w3-round-large" >View Contact</button>
                   
@@ -100,7 +99,6 @@
   </div>
   
 </div>
-
 </div>
 </div><br>
 </div>
@@ -115,7 +113,10 @@ $scope.showMe = !$scope.showMe;
 $scope.SearchContacts=function(SearchUser){
 $scope.emptyArray.push($scope.user);
 $scope.user=null;
-}
+
+  /*optional stuff to do after success */
+};
+} 
 });
 </script>
 </body>
