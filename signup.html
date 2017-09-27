@@ -1,18 +1,9 @@
 <!DOCTYPE html>
-<html>
+
     <title>Personal AIDE</title>
-    <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-        
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
-    
+        <button style="float: right; margin-right: 10px; margin-top:10px;" class="w3-button w3-padding-large w3-white w3-border" > <a  href="#!login">login</a></button>
+
+
     <div ng-app="myApp" ng-controller="myCtrl">
         <div class="w3-content" style="max-width:1400px">
             <!-- Header -->
@@ -41,47 +32,34 @@
                                     <form  name="RegisterForm">
                                         <div  class="form-group" >
                                             <label >User Name</label>
-                                            <input type="text" class="form-control" id="userName" placeholder="Enter Name of the Contact" name="User Name" required="true" ng-minlength=3 ng-model="register.userName">
-                                            
-                                            
+                                            <input type="text" class="form-control" id="userName" placeholder="Enter Name of the Contact" name="User_Name" required="true" minlength="3"   maxlength="20" ng-model="register.userName">
+                                            <span style="color: red" ng-show="RegisterForm.User_Name.$error.required && RegisterForm.User_Name.touched && RegisterForm.User_Name.$dirty ">User Name Requried</span>
+                                            <span style="color:red" ng-show=" RegisterForm.User_Name.$error.minlength">Name must be greater than 3char</span>
                                         </div>
                                         <div  class="form-group">
                                             <label >Password</label>
-                                            <input type="text" class="form-control" id="password" placeholder="Enter Number" name="Password" required="true" ng-model="register.Password"
-                                            ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/">
+                                            <input type="password" class="form-control" id="password" placeholder="Enter Password" name="Password" required="true" ng-model="register.password" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/">
+                                            <span  style="color: red" ng-show="RegisterForm.Password.$error.required && RegisterForm.Password.touched &&  RegisterForm.Password.$dirty" >Password Requried</span>
+                                            <span style="color: red" ng-show="RegisterForm.Password.$error.pattern">Pattern Dosent Match(Password should be at least 8 characters long and should contain one number,one character and one special character.)</span>
+
+                                            
                                         </div>
                                         <div class="form-group" >
                                             <label > Confirm Password</label>
-                                            <input type="text" class="form-control" id="cPassword" placeholder="Enter Number" name="Confirm Password" required="true" ng-model="register.cPassword"
-                                            ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/">
+                                            <input type="password" class="form-control" id="cPassword" placeholder="Enter password again" name="Confirm_Password" required="true" ng-model="register.confirmPassword"
+                                            ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/" ng-pattern="register.password">
+                                            <span  style="color: red"  ng-show="RegisterForm.Confirm_Password.$error.pattern">password dosen't  match</span>
+
                                         </div><br><br>
-                                        <center><p><button style="margin-left: 70px;"   class="w3-button w3-padding-large w3-white w3-border"  ng-click="UserSignUp()"><b>Sign UP</b></button></p></center>
+                                        <span  style="color: green"  ng-show="showRegistrationSuccessfulMessage">Registered Successfully</span>
+                                        <span  style="color: red"  ng-show="showRegistrationUnSuccessfulMessage">User name already exists</span>
+                                        <span style="color: brown" ng-show="redirectionMessage">pls wait while redirecting to main page</span>
+
+                                        <center><p><button style="margin-left: 70px;"   class="w3-button w3-padding-large w3-white w3-border"  ng-disabled="RegisterForm.$invalid" ng-click="UserSignUp()"><b>Sign UP</b></button></p></center>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
-                    <script>
-                    var app = angular.module('myApp', []);
-                    app.controller('myCtrl', function($scope,$http){
                     
-                    
-                    $scope.UserSignUp = function() {
-                    
-                    var url = "http://localhost:8080";
-                    $http.post(url + '/register', {
-                    
-                    "userName":$scope.register.userName,
-                    "password":$scope.register.password,
-                    "confirmPassword":$scope.register.cPassword
-                    })  .then(function(response) {
-                    alert("success");},function(response){
-                    alert("failure");
-                    });
-                    
-                    }    });
-                    
-                    </script>
-                    
-                </html>
+             

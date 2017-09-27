@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+  <head>
+<!--       <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+  <title>Personal AIDE</title>
+
+  </head>
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+<a style="float: right; margin-right: 10px; margin-top: 10px;" href="#!SignOut">SignOut</a>
+  <!-- w3-content defines a container for fixed size centered content,
+  and is wrapped around the whole page content, except for the footer in this example -->
+  <div ng-controller="coreCtrl">
+    <div class="w3-content" style="max-width:1400px">
+      <!-- Header -->
+      <header class="w3-container w3-center w3-padding-32">
+        <h1><b>Personal AIDE</b></h1>
+        <p>Never miss your  <span class="w3-tag">CONTACT......</span></p>
+      </header>
+      <!-- Grid -->
+      <div class="w3-row">
+        <!-- Blog entries -->
+        <div class="w3-col l8 s12">
+          <!-- Blog entry -->
+          <div class="w3-card-4 w3-margin w3-white">
+            
+            
+            <div class="w3-container">
+              <h3><b>Add contact  </b></h3>
+              
+              <h5>Title description, <span class="w3-opacity">April 7, 2014</span></h5>
+            </div>
+            <div class="w3-container">
+              <p>Barton did feebly change man she afford square add. Want eyes by neat so just must. Past draw tall up face show rent oh mr. Required is debating extended wondered as do. New get described applauded incommode shameless out extremity but. Resembled at perpetual no believing is otherwise sportsman. Is do he dispatched cultivated travelling astonished. Melancholy am considered possession on collecting everything. </p>
+              <div class="w3-row">
+                <div class="w3-col m8 s12">
+                  <p><button class="w3-button w3-padding-large w3-white w3-border"  ng-click="ClickToPreviewForm()"><b>Add Contact</b></button></p>
+                  <div ng-show="showMe">
+                    <form  name="myForm">
+                      <div class="form-group">
+                        <label for="email">Name Of the contact</label>
+                        <input type="text" class="form-control" id="email" placeholder="Enter Name of the Contact" name="Event" required="true"  ng-minlength=3 ng-model="user.nameOfContact" >
+                        <span  style="color:red" ng-show=" myForm.Event.$error.required &&  myForm.Event.$dirty && myForm.number.touched"> please enter Contact Name</span>
+                        <span style="color:red" ng-show=" myForm.Event.$error.minlength">Name must be greater than 3char</span>
+                        
+                      </div>
+                      <div class="form-group">
+                        <label for="email">Number Of the contact</label>
+                        <input type="text" class="form-control" id="email" placeholder="Enter Number" name="number" required="true" ng-model="user.UserNumber"
+                        ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" minlength="1"  maxlength="10" allowOnlyNumbers/>
+                        
+                        <span style="color:red" ng-show=" myForm.number.$error.required &&  myForm.number.$dirty && myForm.number.touched"> please enter Contact Number</span>
+                        
+                        
+                        <span style="color:red" class="error" ng-show="myForm.number.$error.pattern">Pattern Dosen't Match</span>
+                      </div>
+                      
+                      
+                      <button type="button" class="btn btn-default" ng-disabled=myForm.$invalid ng-click="addContacts(user)">Add Contact
+                      </button>
+                      
+                    </form>
+                    <span  ng-show=showSuccessMessage style="color: green">Record Inserted Successfully</span>
+                    <span ng-show=showErrorMessage style="color:red">Not Inserted Successfully</span>
+                    <br><br><br>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+        </div>
+        <div class="w3-col l4">
+          <!-- About Card -->
+          <div class="w3-card-2 w3-margin  w3-margin-top">
+            
+            
+          </div>
+          <hr>
+          
+          <!-- Posts -->
+          <div class="w3-card-2 w3-margin">
+            <div class="w3-container w3-padding">
+              <span >Total Contacts::{{emptyArray.length}}</span><br><br>
+              <h4>Added Contacts</h4>
+              <div class="form-group">
+                <label for="email">Search Contact</label>
+                <input type="Search" class="form-control" id="email" placeholder="Search ContactName" name="Search"  ng-model="searchUserContact">
+                
+              </div>
+            <!-- <div>
+              <button class="w3-button w3-white w3-border w3-round-large"   data-toggle="model" data-target="#myModel"  ng-click=deleteAllContacts()>Delete All Contacts</button>
+          
+          <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header"></div>
+            <div class="modal-body">are you sure you want to delete</div>
+            <div  class="modal-footer " >
+                <button >Yes </button>
+                <button >No </button>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div> -->
+      <div>
+      <button class="w3-button w3-white w3-border w3-round-large"   data-toggle="modal" data-target="#myModal" > delete All Contacts</button>
+
+      <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header"></div>
+            <div class="modal-body">are you sure you want to delete {{emptyArray.length}} contacts ?</div>
+
+            <div  class="modal-footer " >
+                <button ng-click="deleteAllContacts ()" data-dismiss="modal">Yes </button>
+                <button data-dismiss="modal">No </button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+            
+                        <ul class="w3-ul w3-hoverable w3-white ">
+              
+              <li class="w3-padding-16" ng-repeat="user in emptyArray | filter:searchUserContact">
+                <label>Name:</label>  <span>{{user.contactName}}</span><br><br>
+                <label>Number:</label><span>{{user.contactNumber}}</span><br><br>
+                <button class="w3-button w3-white w3-border w3-round-large  " ng-click=delete(user.id)>Delete</button>
+                <button class="w3-button w3-white w3-border w3-round-large" style="display: inline-block;" ng-click=edit(user,$index,user.id)>Edit</button>
+                <hr>
+              </ul>
+            </div>
+            <hr>
+            
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+</div><br>
+</div>
+</body>

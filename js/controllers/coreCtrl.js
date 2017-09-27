@@ -1,30 +1,32 @@
-var app = angular.module('myApp', ["ngRoute"]);
-app.config(function($routeProvider) {
-    $routeProvider
-    .when("/signup", {
-        templateUrl : "signup.html",
-        controller:"myCtrl"
-    })
-    .when("/corePage", {
-        templateUrl : "corePage.html",
-        controller:"myCtrl"
+app.controller('coreCtrl', function($scope, $http, $timeout,$location) {
 
-    })
-  
-
-});
-app.controller('myCtrl', function($scope, $http, $timeout) {
-    $scope.showMe = false;
+   $scope.showMe = false;
     $scope.showSuccessMessage = false;
     $scope.showErrorMessage = false;
     $scope.showErrorMessage = false;
     $scope.showTotalContacts = false;
-    $scope.emptyArray = [];
+     $scope.emptyArray = [];
+     
+    var url = "http://localhost:8080";
+     $http.post(url + '/all').then(function(response) {
+                $scope.emptyArray = response.data
+            });
+        
+        // , function(response) {
+        //     $scope.showErrorMessage = true;
+        //     $timeout(function() {
+        //         $scope.showErrorMessage = false;
+        //     }, 3000);
+            
+        // });
+  
+   
     $scope.ClickToPreviewForm = function() {
         $scope.showMe = !$scope.showMe;
         $scope.showSuccessMessage = false;
         $scope.showErrorMessage = false;
     }
+
     $scope.addContacts = function() {
         // $scope.emptyArray.push($scope.user);
         var url = "http://localhost:8080";
@@ -38,9 +40,14 @@ app.controller('myCtrl', function($scope, $http, $timeout) {
             $scope.user = {};
             $scope.showDeleteMessage = true;
             $timeout(function() {
+				
                 $scope.showSuccessMessage = false;
+				
+            
             }, 3000);
-            $http.post(url + '/all').then(function(response) {
+			
+			
+		 $http.post(url + '/all').then(function(response) {
                 $scope.emptyArray = response.data
             });
         }, function(response) {
@@ -48,6 +55,7 @@ app.controller('myCtrl', function($scope, $http, $timeout) {
             $timeout(function() {
                 $scope.showErrorMessage = false;
             }, 3000);
+			
         });
     }
     $scope.delete = function(userid) {
@@ -57,32 +65,42 @@ app.controller('myCtrl', function($scope, $http, $timeout) {
                 $scope.emptyArray = response.data
             });
         }, function(response) {
-            alert("error");
+            // alert("error");
         });
     }
     $scope.deleteAllContacts = function() {
         var url = "http://localhost:8080";
         $scope.showTotalContacts = true;
         $http.delete(url + '/deleteAll').then(function(response) {
-            alert("Success");
+          
             $http.post(url + '/all').then(function(response) {
                 $scope.emptyArray = response.data
             });
          }, function(response) {
-            alert("error");
+            // alert("error");
         });
     }
     $scope.edit = function(user, deleteindex, userid) {
+         $scope.showMe = true;
         var url = "http://localhost:8080";
         $scope.emptyArray.splice(deleteindex, 1);
+    $scope.user={};
         $scope.user.nameOfContact = user.contactName;
         $scope.user.UserNumber = user.contactNumber;
        $http.delete(url+'/contacts/'+userid).then(function(response) {
         },function(response){
-            alert("error");
-        }
+            // alert("error");
+        });
        
-       );
+       
+       $http.put(url+'/editUser',{
+        "$scope.user.nameOfContact":user.contactName,
+        "$scope.user.UserNumber":user.contactNumber
+       }).then(function(response){
+        // alert("success");
+       },function(response){
+        // alert("error");
+       });
 
 
     }
